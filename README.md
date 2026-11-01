@@ -5,6 +5,7 @@ Each folder contains the code files and a README with the aim, theory, steps (Ub
 | Task | Topic |
 |------|-------|
 | [01](Task01-Git-Basics) | Git basics – init, push, branch, diff |
+| [02](Task02-Git-PR) | Git branches + Pull Request |
 
 ## One-time setup (run first on the lab machine)
 ```bash
