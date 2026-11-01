@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment               # manages identical pods
+metadata:
+  name: iris-app
+spec:
+  replicas: 2                  # number of pods
+  selector:
+    matchLabels: {app: iris-app}
+  template:
+    metadata:
+      labels: {app: iris-app}
+    spec:
+      containers:
+      - name: iris-app
+        image: iris-app
+        imagePullPolicy: Never # use the image loaded into minikube, don't download
+        ports: [{containerPort: 5000}]
+---
+apiVersion: v1
+kind: Service                  # stable address that load-balances across pods
+metadata:
+  name: iris-service
+spec:
+  type: NodePort               # exposes the app outside the cluster
+  selector: {app: iris-app}
+  ports: [{port: 5000, targetPort: 5000}]

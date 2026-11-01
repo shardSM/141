@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    triggers { pollSCM('* * * * *') }
+    environment { IMAGE = "iris-app:${BUILD_NUMBER}" }   // new tag for every build
+    stages {
+        stage('Build') {
+            steps { sh "docker build -t ${IMAGE} ." }
+        }
+        stage('Test') {
+            steps { sh "docker run --rm ${IMAGE} python -c 'import app; print(\"tests ok\")'" }
+        }
+        stage('Load into Minikube') {
+            steps { sh "minikube image load ${IMAGE}" }
+        }
+        stage('Deploy') {
+            steps {
+                sh "kubectl apply -f k8s.yaml"
+                sh "kubectl set image deployment/iris-app iris-app=${IMAGE}"
+                sh "kubectl rollout status deployment/iris-app"
+            }
+        }
+    }
+}
