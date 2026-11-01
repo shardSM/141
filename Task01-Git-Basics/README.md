@@ -28,8 +28,8 @@ f. Commit, push and demonstrate the difference between master and GIT-EXAM
 ```bash
 mkdir ds-project && cd ds-project
 git init
-git config --global user.name "Your Name"
-git config --global user.email "you@example.com"
+git config --global user.name "shardSM"
+git config --global user.email "shardulmarathe374@gmail.com"
 ```
 
 ### b. First commit and push
@@ -38,7 +38,7 @@ echo "# Data Science Project" > README.md
 git add README.md
 git commit -m "Initial commit"
 git branch -M master
-git remote add origin https://github.com/<username>/ds-project.git
+git remote add origin https://github.com/shardSM/ds-project.git
 git push -u origin master        # username + token as password
 ```
 
